@@ -56,7 +56,7 @@ portfolio-react/
 - **Hero** — apresentação com foto, status `disponível para projetos`, tags flutuantes e CTAs
 - **Sobre** — bio + card `developer.js` estilizado como código
 - **Habilidades** — 3 cards (Front-end, Back-end, Sistemas & IoT) com chips
-- **Projetos** — `Lâmpada Inteligente` (IoT), `ChessDuel` (Elixir + Vue.js · Em desenvolvimento) e `Monitoramento Ambiental` (ESP32)
+- **Projetos** — `Lâmpada Inteligente` (IoT), `ChessDuel` (Elixir + Vue.js · Em desenvolvimento), `Monitoramento Ambiental` (ESP32) e `PokeRogue` (C + SDL2 · jogo roguelike multiplataforma)
 - **Contato** — CTA para `vimarinholima@gmail.com`
 - **Header fixo** com navegação ativa (observa `section[id]`) e **menu hamburguer** no mobile
 
@@ -85,6 +85,10 @@ npm run preview
 ```
 
 > **Node requerido:** `v20+` (testado com `v20.19.0`)
+
+## 🐳 Docker Compose
+
+Na raiz do repositório, execute `docker compose up --build` e acesse <http://localhost:8080>. Para parar o container, execute `docker compose down`.
 
 ## 📜 Scripts
 

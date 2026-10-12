@@ -70,6 +70,16 @@ npm run build         # gera dist/
 npm run preview       # serve dist/ em http://localhost:4173
 ```
 
+### Docker Compose
+
+Na raiz do repositório, execute:
+
+```bash
+docker compose up --build
+```
+
+Acesse <http://localhost:8080>. Para parar e remover o container, use `docker compose down`.
+
 ### HTML puro
 
 Abra direto no navegador — sem build:
@@ -89,6 +99,7 @@ python3 -m http.server --directory portfolio_html 8000
 - **Lâmpada Inteligente** · `ESP32 · Mobile · IoT` — iluminação com controle por app
 - **ChessDuel** · `Elixir · Vue.js · WebSocket` — xadrez online *(em desenvolvimento)*
 - **Monitoramento Ambiental** · `ESP32 · Sensores · Dados` — sensores para ambientes controlados
+- **PokeRogue** · `C · SDL2 · Filas · Pilhas · Listas` — jogo roguelike de batalha e captura de Pokémon para Linux e Windows
 
 ## 🛠️ Tecnologias
 

@@ -12,6 +12,7 @@ const projects = [
   { number: '01', mark: 'bulb', type: 'IoT · Automação', title: 'Lâmpada Inteligente', text: 'Projeto de iluminação inteligente com controle por aplicativo.', tags: ['ESP32', 'Mobile', 'IoT'] },
   { number: '02', mark: 'knight', type: 'Web · Full stack', title: 'ChessDuel', text: 'Plataforma de xadrez online utilizando Elixir e Vue.js.', tags: ['Elixir', 'Vue.js', 'WebSocket'], status: 'Em desenvolvimento' },
   { number: '03', mark: 'camera', type: 'IoT · Monitoramento', title: 'Monitoramento Ambiental', text: 'Sistema que verifica condições de ambientes controlados com sensores e ESP32.', tags: ['ESP32', 'Sensores', 'Dados'] },
+  { number: '04', mark: 'pokeball', type: 'Jogo · Multiplataforma', title: 'PokeRogue', text: 'Jogo de Pokémon com batalhas e capturas em pixel art.', tags: ['C', 'SDL2', 'Filas', 'Pilhas', 'Listas'] },
 ]
 
 export default function App() {

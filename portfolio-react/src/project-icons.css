@@ -23,3 +23,23 @@
   font: 400 50px/1 Georgia, serif;
   transform: translateY(-2px);
 }
+
+.projects {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+}
+
+@media (max-width: 900px) {
+  .projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projects .project:last-child {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .projects {
+    grid-template-columns: 1fr;
+  }
+}
