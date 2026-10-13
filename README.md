@@ -80,6 +80,20 @@ docker compose up --build
 
 Acesse <http://localhost:8080>. Para parar e remover o container, use `docker compose down`.
 
+### Deploy GCP (VM · Nginx)
+
+Deploy manual, sem atualização automática pelo Git na VM. Ao atualizar o código na
+VM pelo Git, `node_modules/` não fica sob versionamento — instale as dependências
+antes de gerar o build:
+
+```bash
+git pull
+npm ci          # instala as dependências a partir do package-lock.json
+npm run build   # gera dist/ para o Nginx servir
+```
+
+> `portfolio-react/dist/` permanece versionado para preservar o processo atual de publicação.
+
 ### HTML puro
 
 Abra direto no navegador — sem build:

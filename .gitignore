@@ -1,0 +1,29 @@
+# Dependências
+node_modules/
+
+# Artefatos de build
+dist/
+
+# Variáveis de ambiente (mantém arquivos de exemplo)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Logs de desenvolvimento
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Caches de ferramentas
+.vite/
+.cache/
+*.tsbuildinfo
+
+# Sistema operacional / editores
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
