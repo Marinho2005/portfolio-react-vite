@@ -139,7 +139,7 @@ python3 -m http.server --directory portfolio_html 8000
 - **Lâmpada Inteligente** · `ESP32 · Mobile · IoT` — iluminação com controle por app
 - **ChessDuel** · `Elixir · Vue.js · WebSocket` — xadrez online *(em desenvolvimento)*
 - **Monitoramento Ambiental** · `ESP32 · Sensores · Dados` — sensores para ambientes controlados
-- **PokeRogue** · `C · SDL2 · Filas · Pilhas · Listas` — jogo roguelike de batalha e captura de Pokémon para Linux e Windows
+- **PokeBattle** · `C · SDL2 · Filas · Pilhas · Listas` — jogo roguelike de batalha e captura de Pokémon para Linux e Windows
 
 ## 🛠️ Tecnologias
 

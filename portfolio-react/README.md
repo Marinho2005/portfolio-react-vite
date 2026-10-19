@@ -56,7 +56,7 @@ portfolio-react/
 - **Hero** — apresentação com foto, status `disponível para projetos`, tags flutuantes e CTAs
 - **Sobre** — bio + card `developer.js` estilizado como código
 - **Habilidades** — 3 cards (Front-end, Back-end, Sistemas & IoT) com chips
-- **Projetos** — `Lâmpada Inteligente` (IoT), `ChessDuel` (Elixir + Vue.js · Em desenvolvimento), `Monitoramento Ambiental` (ESP32) e `PokeRogue` (C + SDL2 · jogo roguelike multiplataforma)
+- **Projetos** — `Lâmpada Inteligente` (IoT), `ChessDuel` (Elixir + Vue.js · Em desenvolvimento), `Monitoramento Ambiental` (ESP32) e `PokeBattle` (C + SDL2 · jogo roguelike multiplataforma)
 - **Contato** — CTA para `vimarinholima@gmail.com`
 - **Header fixo** com navegação ativa (observa `section[id]`) e **menu hamburguer** no mobile
 
