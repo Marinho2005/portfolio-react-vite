@@ -1,8 +1,20 @@
-{$SITE_ADDRESS} {
+{
+	auto_https disable_redirects
+}
+
+(portfolio_files) {
 	root * /srv
 	encode zstd gzip
 	try_files {path} /index.html
 	file_server
+}
+
+http://{$SITE_ADDRESS} {
+	import portfolio_files
+}
+
+{$SITE_ADDRESS} {
+	import portfolio_files
 	tls {
 		issuer acme {
 			profile shortlived

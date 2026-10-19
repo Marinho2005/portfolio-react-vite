@@ -7,7 +7,7 @@ services:
       - "${PORT:-8080}:80"
       - "${HTTPS_PORT:-8443}:443"
     environment:
-      SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+      SITE_ADDRESS: ${SITE_ADDRESS:-localhost}
     volumes:
       - caddy_data:/data
       - caddy_config:/config

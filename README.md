@@ -93,10 +93,10 @@ persistem os certificados entre atualizações. No diretório do repositório na
 SITE_ADDRESS=IP_DA_VPS PORT=80 HTTPS_PORT=443 docker compose up -d --build
 ```
 
-Depois, acesse `https://IP_DA_VPS`; o Caddy redireciona HTTP para HTTPS. A emissão
-do certificado público exige que o IP seja público e que as portas TCP 80 e 443
-estejam acessíveis externamente. Para atualizar manualmente, execute `git pull` e
-repita o comando do Compose acima.
+Depois, `http://IP_DA_VPS` servirá HTTP sem redirecionar, e `https://IP_DA_VPS`
+tentará HTTPS em paralelo. A emissão do certificado público exige que o IP seja
+público e que as portas TCP 80 e 443 estejam acessíveis externamente. Para
+atualizar manualmente, execute `git pull` e repita o comando do Compose acima.
 
 #### Deploy automático pelo GitHub Actions
 
