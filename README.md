@@ -70,7 +70,7 @@ npm run build         # gera dist/
 npm run preview       # serve dist/ em http://localhost:4173
 ```
 
-### Docker Compose
+### Docker Compose com Caddy
 
 Na raiz do repositório, execute:
 
@@ -80,19 +80,46 @@ docker compose up --build
 
 Acesse <http://localhost:8080>. Para parar e remover o container, use `docker compose down`.
 
-### Deploy GCP (VM · Nginx)
+### Deploy em VPS (IP da VM · Caddy)
 
-Deploy manual, sem atualização automática pelo Git na VM. Ao atualizar o código na
-VM pelo Git, `node_modules/` não fica sob versionamento — instale as dependências
-antes de gerar o build:
+O container compila a versão React e serve os arquivos estáticos com Caddy. Para
+usar a porta HTTP padrão do IP da VM, primeiro pare e desabilite o Nginx instalado
+no host, para liberar a porta 80. No diretório do repositório na VPS:
 
 ```bash
-git pull
-npm ci          # instala as dependências a partir do package-lock.json
-npm run build   # gera dist/ para o Nginx servir
+PORT=80 docker compose up -d --build
 ```
 
-> `portfolio-react/dist/` permanece versionado para preservar o processo atual de publicação.
+Depois, acesse `http://IP_DA_VPS`. Sem um domínio apontado para a VM, o site será
+servido por HTTP; o HTTPS automático do Caddy requer um domínio público e acesso
+às portas 80 e 443. Para atualizar manualmente, execute `git pull` e repita o
+comando do Compose acima.
+
+#### Deploy automático pelo GitHub Actions
+
+O workflow [deploy-vps.yml](.github/workflows/deploy-vps.yml) faz deploy a cada
+push na branch `main`. Na VPS, confirme que `portfolio-vm` pode escrever no
+repositório e executar Docker Compose. Se necessário:
+
+```bash
+sudo chown -R portfolio-vm:portfolio-vm /var/www/portfolio
+sudo usermod -aG docker portfolio-vm
+```
+
+Depois de adicionar o usuário ao grupo `docker`, encerre e reabra a sessão SSH.
+Esse grupo concede privilégios equivalentes a root. A VPS também precisa ter
+acesso Git configurado para executar `git pull` (por exemplo, uma deploy key se
+o repositório for privado).
+
+Em **Settings → Secrets and variables → Actions**, crie estes repository secrets:
+
+- `VPS_HOST`: IP público da VM.
+- `VPS_SSH_KEY`: chave privada SSH autorizada para o usuário `portfolio-vm`.
+- `VPS_KNOWN_HOSTS`: chave de host SSH da VM, obtida e conferida por fingerprint.
+
+Após o setup, cada push em `main` executa `git pull` em `/var/www/portfolio` e
+reconstrói o container com `PORT=80`. O workflow também pode ser disparado
+manualmente pela aba **Actions** do GitHub.
 
 ### HTML puro
 
