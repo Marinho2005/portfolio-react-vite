@@ -22,9 +22,11 @@ jobs:
           VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
           VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
         run: |
+          test -n "$VPS_SSH_KEY" || { echo "Missing VPS_SSH_KEY repository secret"; exit 1; }
+          test -n "$VPS_KNOWN_HOSTS" || { echo "Missing VPS_KNOWN_HOSTS repository secret"; exit 1; }
           install -m 700 -d ~/.ssh
-          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/portfolio_vps_actions
+          chmod 600 ~/.ssh/portfolio_vps_actions
           printf '%s\n' "$VPS_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
@@ -32,5 +34,6 @@ jobs:
         env:
           VPS_HOST: ${{ secrets.VPS_HOST }}
         run: |
-          ssh -i ~/.ssh/id_ed25519 -o BatchMode=yes "portfolio-vm@$VPS_HOST" \
+          test -n "$VPS_HOST" || { echo "Missing VPS_HOST repository secret"; exit 1; }
+          ssh -i ~/.ssh/portfolio_vps_actions -o BatchMode=yes "portfolio-vm@$VPS_HOST" \
             'cd /var/www/portfolio && git pull --ff-only origin main && PORT=80 docker compose up -d --build --remove-orphans'
