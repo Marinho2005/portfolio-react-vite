@@ -80,23 +80,19 @@ docker compose up --build
 
 Acesse <http://localhost:8080>. Para parar e remover o container, use `docker compose down`.
 
-### Deploy em VPS (IP da VM · Caddy com HTTPS)
+### Deploy em VPS (IP da VM · Caddy HTTP)
 
 O container compila a versão React e serve os arquivos estáticos com Caddy. Para
-usar o IP da VM com certificado HTTPS público, primeiro pare e desabilite o Nginx
-instalado no host, para liberar as portas 80 e 443. Libere também TCP 80 e 443 no
-firewall da VM. O Caddy usa o perfil ACME `shortlived` para certificados de IP,
-que são válidos por cerca de seis dias e renovados automaticamente; os volumes
-persistem os certificados entre atualizações. No diretório do repositório na VPS:
+usar o IP da VM, pare e desabilite o Nginx instalado no host para liberar a porta
+80. No diretório do repositório na VPS:
 
 ```bash
-SITE_ADDRESS=IP_DA_VPS PORT=80 HTTPS_PORT=443 docker compose up -d --build
+PORT=80 docker compose up -d --build
 ```
 
-Depois, `http://IP_DA_VPS` servirá HTTP sem redirecionar, e `https://IP_DA_VPS`
-tentará HTTPS em paralelo. A emissão do certificado público exige que o IP seja
-público e que as portas TCP 80 e 443 estejam acessíveis externamente. Para
-atualizar manualmente, execute `git pull` e repita o comando do Compose acima.
+Depois, acesse `http://IP_DA_VPS`. Este deploy serve apenas HTTP, sem tentar
+redirecionar para HTTPS. Para atualizar manualmente, execute `git pull` e repita
+o comando do Compose acima.
 
 #### Deploy automático pelo GitHub Actions
 
@@ -121,8 +117,8 @@ Em **Settings → Secrets and variables → Actions**, crie estes repository sec
 - `VPS_KNOWN_HOSTS`: chave de host SSH da VM, obtida e conferida por fingerprint.
 
 Após o setup, cada push em `main` executa `git pull` em `/var/www/portfolio` e
-reconstrói o container com HTTPS usando o IP de `VPS_HOST`. O workflow também
-pode ser disparado manualmente pela aba **Actions** do GitHub.
+reconstrói o container HTTP na porta 80. O workflow também pode ser disparado
+manualmente pela aba **Actions** do GitHub.
 
 ### HTML puro
 
