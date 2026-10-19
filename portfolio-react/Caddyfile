@@ -1,6 +1,11 @@
-:80 {
+{$SITE_ADDRESS} {
 	root * /srv
 	encode zstd gzip
 	try_files {path} /index.html
 	file_server
+	tls {
+		issuer acme {
+			profile shortlived
+		}
+	}
 }

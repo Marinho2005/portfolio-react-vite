@@ -36,4 +36,4 @@ jobs:
         run: |
           test -n "$VPS_HOST" || { echo "Missing VPS_HOST repository secret"; exit 1; }
           ssh -i ~/.ssh/portfolio_vps_actions -o BatchMode=yes "portfolio-vm@$VPS_HOST" \
-            'cd /var/www/portfolio && git pull --ff-only origin main && PORT=80 docker compose up -d --build --remove-orphans'
+            "cd /var/www/portfolio && git pull --ff-only origin main && SITE_ADDRESS='$VPS_HOST' PORT=80 HTTPS_PORT=443 docker compose up -d --build --remove-orphans"
