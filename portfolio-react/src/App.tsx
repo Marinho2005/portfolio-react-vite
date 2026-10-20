@@ -9,10 +9,10 @@ const skills = [
 ]
 
 const projects = [
-  { number: '01', mark: 'bulb', type: 'IoT · Automação', title: 'Lâmpada Inteligente', text: 'Projeto de iluminação inteligente com controle por aplicativo.', tags: ['ESP32', 'Mobile', 'IoT'] },
-  { number: '02', mark: 'knight', type: 'Web · Full stack', title: 'ChessDuel', text: 'Plataforma de xadrez online utilizando Elixir e Vue.js.', tags: ['Elixir', 'Vue.js', 'WebSocket'], status: 'Em desenvolvimento' },
-  { number: '03', mark: 'camera', type: 'IoT · Monitoramento', title: 'Monitoramento Ambiental', text: 'Sistema que verifica condições de ambientes controlados com sensores e ESP32.', tags: ['ESP32', 'Sensores', 'Dados'] },
-  { number: '04', mark: 'pokeball', type: 'Jogo · Multiplataforma', title: 'PokeBattle', text: 'Jogo de Pokémon com batalhas e capturas em pixel art.', tags: ['C', 'SDL2', 'Filas', 'Pilhas', 'Listas'] },
+  { number: '01', mark: 'bulb', type: 'IoT · Automação', title: 'Lâmpada Inteligente', text: 'Projeto de iluminação inteligente com controle por aplicativo.', tags: ['ESP32', 'Mobile', 'IoT'], href: 'https://github.com/Marinho2005/iot-camada-de-aplicacao' },
+  { number: '02', mark: 'knight', type: 'Web · Full stack', title: 'ChessDuel', text: 'Plataforma de xadrez online utilizando Elixir e Vue.js.', tags: ['Elixir', 'Vue.js', 'WebSocket'], status: 'Em desenvolvimento', href: 'https://chessduel.vercel.app/' },
+  { number: '03', mark: 'camera', type: 'IoT · Monitoramento', title: 'Monitoramento Ambiental', text: 'Sistema que verifica condições de ambientes controlados com sensores e ESP32.', tags: ['ESP32', 'Sensores', 'Dados'], href: 'https://github.com/Marinho2005/esp32-potenciometro-iot-rails' },
+  { number: '04', mark: 'pokeball', type: 'Jogo · Multiplataforma', title: 'PokeBattle', text: 'Jogo de Pokémon com batalhas e capturas em pixel art.', tags: ['C', 'SDL2', 'Filas', 'Pilhas', 'Listas'], href: 'https://github.com/Marinho2005/Jogo-pokemom-Estrutura-de-Dados-' },
 ]
 
 export default function App() {
@@ -100,10 +100,10 @@ export default function App() {
 
         <section id="projetos" className="section wrap reveal">
           <div className="section-heading"><span>03.</span><h2>&lt;Projetos /&gt;</h2><i /></div>
-          <div className="projects">{projects.map(project => <article className={`project ${project.status ? 'featured' : ''}`} key={project.title}>
+          <div className="projects">{projects.map(project => <a className={`project ${project.status ? 'featured' : ''}`} href={project.href} target="_blank" rel="noreferrer" key={project.title}>
             <div className="project-top"><span>{project.number}</span><span>↗</span></div><div className="project-mark"><ProjectIcon name={project.mark} /></div><p className="project-type">{project.type}</p><h3>{project.title}</h3><p>{project.text}</p>
             {project.status && <div className="project-status"><i /> {project.status}</div>}<Tags items={project.tags} />
-          </article>)}</div>
+          </a>)}</div>
         </section>
 
         <section id="contato" className="section contact"><div className="wrap reveal">
