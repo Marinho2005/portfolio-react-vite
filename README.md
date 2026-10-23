@@ -80,45 +80,12 @@ docker compose up --build
 
 Acesse <http://localhost:8080>. Para parar e remover o container, use `docker compose down`.
 
-### Deploy em VPS (IP da VM · Caddy HTTP)
+### Deploy na Vercel
 
-O container compila a versão React e serve os arquivos estáticos com Caddy. Para
-usar o IP da VM, pare e desabilite o Nginx instalado no host para liberar a porta
-80. No diretório do repositório na VPS:
-
-```bash
-PORT=80 docker compose up -d --build
-```
-
-Depois, acesse `http://IP_DA_VPS`. Este deploy serve apenas HTTP, sem tentar
-redirecionar para HTTPS. Para atualizar manualmente, execute `git pull` e repita
-o comando do Compose acima.
-
-#### Deploy automático pelo GitHub Actions
-
-O workflow [deploy-vps.yml](.github/workflows/deploy-vps.yml) faz deploy a cada
-push na branch `main`. Na VPS, confirme que `portfolio-vm` pode escrever no
-repositório e executar Docker Compose. Se necessário:
-
-```bash
-sudo chown -R portfolio-vm:portfolio-vm /var/www/portfolio
-sudo usermod -aG docker portfolio-vm
-```
-
-Depois de adicionar o usuário ao grupo `docker`, encerre e reabra a sessão SSH.
-Esse grupo concede privilégios equivalentes a root. A VPS também precisa ter
-acesso Git configurado para executar `git pull` (por exemplo, uma deploy key se
-o repositório for privado).
-
-Em **Settings → Secrets and variables → Actions**, crie estes repository secrets:
-
-- `VPS_HOST`: IP público da VM.
-- `VPS_SSH_KEY`: chave privada SSH autorizada para o usuário `portfolio-vm`.
-- `VPS_KNOWN_HOSTS`: chave de host SSH da VM, obtida e conferida por fingerprint.
-
-Após o setup, cada push em `main` executa `git pull` em `/var/www/portfolio` e
-reconstrói o container HTTP na porta 80. O workflow também pode ser disparado
-manualmente pela aba **Actions** do GitHub.
+A versão React também é publicada na Vercel. Consulte o projeto na Vercel para
+ver a URL de produção e o estado dos deployments. Este repositório não contém
+um workflow próprio da Vercel; a publicação depende da integração Git ou da
+configuração do projeto na plataforma.
 
 ### Deploy no Google Cloud Run
 
