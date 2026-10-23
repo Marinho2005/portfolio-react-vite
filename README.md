@@ -120,6 +120,36 @@ Após o setup, cada push em `main` executa `git pull` em `/var/www/portfolio` e
 reconstrói o container HTTP na porta 80. O workflow também pode ser disparado
 manualmente pela aba **Actions** do GitHub.
 
+### Deploy no Google Cloud Run
+
+A versão React também está publicada no Cloud Run: [victormarinholima.cloud.run](https://victormarinholima.cloud.run).
+O serviço usa a imagem Docker construída a partir de `portfolio-react/Dockerfile`.
+Para fazer um deploy manual, com Docker e `gcloud` instalados e autenticados:
+
+```bash
+PROJECT_ID="project-90a46e46-8829-4f4a-afb"
+REGION="us-central1"
+IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/portfolio-react:$(date +%Y%m%d-%H%M%S)"
+
+gcloud auth configure-docker us-central1-docker.pkg.dev
+docker build -t "$IMAGE" ./portfolio-react
+docker push "$IMAGE"
+gcloud run deploy portfolio-react \
+  --image "$IMAGE" \
+  --region "$REGION" \
+  --project "$PROJECT_ID" \
+  --allow-unauthenticated \
+  --min 0 --max 2 \
+  --cpu 1 --memory 256Mi
+```
+
+O serviço escala para zero quando não há tráfego. O Cloud Run tem cotas mensais
+sem custo, mas exige faturamento habilitado e pode cobrar pelo uso acima das
+cotas ou por serviços auxiliares, como armazenamento das imagens no Artifact
+Registry. O deploy a partir da origem com Cloud Build pode exigir permissões
+adicionais; os comandos acima constroem a imagem localmente e a enviam ao
+Artifact Registry.
+
 ### HTML puro
 
 Abra direto no navegador — sem build:
